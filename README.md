@@ -39,20 +39,20 @@ graph TD
 
 ## Estrutura de Diretórios
 
-projeto-engenharia-dados-aws/
-├── data/
-│   ├── raw/                 # CSVs originais baixados do Kaggle (ignorado pelo git)
-│   ├── trusted/             # Dados limpos (uso futuro local se necessário)
-│   └── refined/             # Dados modelados (uso futuro local se necessário)
-├── src/
-│   ├── ingestion/
-│   │   ├── __init__.py
-│   │   └── upload_to_s3.py  # Script de ingestão da máquina local para a AWS
-│   ├── transformation/      # Scripts Glue / PySpark (em breve)
-│   └── analysis/            # Queries SQL do Athena (em breve)
-├── .env.example             # Modelo das variáveis de ambiente (seguro para o Git)
-├── .gitignore               # Proteção contra vazamento de chaves e dados pesados
-└── README.md                # Documentação do projeto
+> projeto-engenharia-dados-aws/
+> ├── data/
+> │   ├── raw/                 		# CSVs originais baixados do Kaggle (ignorado pelo git)
+> │   ├── trusted/            		# Dados limpos (uso futuro local se necessário)
+> │   └── refined/             		# Dados modelados (uso futuro local se necessário)
+> ├── src/
+> │   ├── ingestion/
+> │   │   ├── __init__.py
+> │   │   └── upload_to_s3.py  	# Script de ingestão da máquina local para a AWS
+> │   ├── transformation/      	# Scripts Glue / PySpark (em breve)
+> │   └── analysis/            		# Queries SQL do Athena (em breve)
+> ├── .env.example             		# Modelo das variáveis de ambiente (seguro para o Git)
+> ├── .gitignore               		# Proteção contra vazamento de chaves e dados pesados
+> └── README.md                	# Documentação do projeto
 
 ## Preparação dos Dados
 
