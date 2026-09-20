@@ -1,0 +1,22 @@
+# Arquivo .env
+.env
+
+# Dados locais
+data/
+.csv
+.zip
+.tar
+.tar.gz
+.tgz
+
+# Variáveis de ambiente
+
+.venv/
+venv/
+env/
+
+# Cache temporário do python
+pycache/
+*.pyc
+*.pyo
+.pytest_cache/
