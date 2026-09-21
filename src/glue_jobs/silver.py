@@ -18,9 +18,11 @@ SILVER_PATH = f"s3://{BUCKET_NAME}/trusted/orders"
 sc = SparkContext.getOrCreate()
 glueContext = GlueContext(sc)
 spark = glueContext.spark_session
+job = Job(glueContext)
+job.init(args['JOB_NAME'], args)
 
 # 2. Definição do Schema
-schema = StringType([
+schema = StructType([
     StructField('order_id', StringType(), True),
     StructField('customer_id', StringType(), True),
     StructField('order_status', StringType(), True),
@@ -40,7 +42,7 @@ df_orders = spark.read\
 
 
 # 4. Remoção de valores ausentes
-df_transformed = df_transformed.dropna(subset = ["order_id"])
+df_transformed = df_orders.dropna(subset = ["order_id"])
 
 # 5. Garantindo que a data da entrega não seja menor que a data da compra
 df_transformed = df_transformed.withColumn(
