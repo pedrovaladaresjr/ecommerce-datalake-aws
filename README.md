@@ -105,4 +105,11 @@ Nesta primeira versão, o pipeline realiza a extração dos dados locais e o car
    ```
    python src/ingestion/upload_to_s3.py
    ```
+
    Você acompanhará via terminal o upload de cada entidade para a nuvem. Acesse o console do Amazon S3 para validar a criação dos objetos com o prefixo /raw.
+
+
+## Modelagem de Dados
+
+### Modelo Multidimensional - Star Schema
+![Modelo de Dados](docs/gold-star-schema.png)

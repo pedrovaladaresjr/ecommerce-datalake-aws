@@ -1,0 +1,45 @@
+// ----------------------------------------------------
+// MODELO MULTIDIMENSIONAL: CAMADA GOLD (REFINED)
+// Star Schema para Análise de BI e Relatórios
+// ----------------------------------------------------
+
+Table gold_fato_vendas_logistica [headercolor: #27ae60] {
+  order_id varchar [primary key, note: 'Chave do Pedido (Granularidade)']
+  order_item_id int [primary key, note: 'Item do Pedido (Granularidade)']
+  customer_id varchar [note: 'FK para dim_customers']
+  review_id varchar [note: 'FK para a avaliação original (Opcional)']
+  
+  // Métricas (Fatos)
+  price double [note: 'Valor unitário do produto']
+  freight_value double [note: 'Valor do frete']
+  valor_total_pedido double [note: 'Métrica Calculada: price + freight_value']
+  review_score int [note: 'Nota de satisfação (1 a 5)']
+  
+  // Engenharia de Features (Cálculos de Negócio)
+  tempo_entrega_dias int [note: 'Calculado: data entrega - data compra']
+  atraso_entrega boolean [note: 'Flag Calculada: Entrega > Estimativa']
+  
+  // Colunas de Particionamento Temporal (FK Lógica)
+  order_year int [note: 'Ano da Compra']
+  order_month int [note: 'Mês da Compra']
+}
+
+Table dim_customers [headercolor: #2980b9] {
+  customer_id varchar [primary key]
+  customer_unique_id varchar
+  customer_city varchar
+  customer_state varchar [note: 'Estado para análise geográfica']
+}
+
+// Tabela de Dimensão Temporal Lógica (Representada pelo particionamento)
+Table dim_tempo [headercolor: #2980b9] {
+  order_year int [primary key]
+  order_month int [primary key]
+  trimestre int
+  semestre int
+}
+
+// Relacionamentos do Star Schema
+Ref: gold_fato_vendas_logistica.customer_id > dim_customers.customer_id
+Ref: gold_fato_vendas_logistica.order_year > dim_tempo.order_year
+Ref: gold_fato_vendas_logistica.order_month > dim_tempo.order_month
