@@ -1,0 +1,50 @@
+// ----------------------------------------------------
+// MODELO LÓGICO: CAMADA SILVER (TRUSTED)
+// Tabelas normalizadas (3NF) provenientes do dado bruto
+// ----------------------------------------------------
+
+Table tb_customers {
+  customer_id varchar [primary key, note: 'Chave primária do cliente']
+  customer_unique_id varchar
+  customer_zip_code_prefix varchar
+  customer_city varchar
+  customer_state varchar
+}
+
+Table tb_orders {
+  order_id varchar [primary key, note: 'Chave primária do pedido']
+  customer_id varchar [note: 'Chave estrangeira para tb_customers']
+  order_status varchar
+  order_purchase_timestamp timestamp
+  order_approved_at timestamp
+  order_delivered_carrier_date timestamp
+  order_delivered_customer_date timestamp
+  order_estimated_delivery_date timestamp
+  order_year int [note: 'Coluna de particionamento']
+  order_month int [note: 'Coluna de particionamento']
+}
+
+Table tb_order_items {
+  order_id varchar [primary key, note: 'Parte da PK composta (FK para tb_orders)']
+  order_item_id int [primary key, note: 'Parte da PK composta']
+  product_id varchar
+  seller_id varchar
+  shipping_limit_date timestamp
+  price double
+  freight_value double
+}
+
+Table tb_order_reviews {
+  review_id varchar [primary key, note: 'Chave primária da avaliação']
+  order_id varchar [note: 'Chave estrangeira para tb_orders']
+  review_score int
+  review_comment_title varchar
+  review_comment_message varchar
+  review_creation_date timestamp
+  review_answer_timestamp timestamp
+}
+
+// Relacionamentos (Foreign Keys)
+Ref: tb_orders.customer_id > tb_customers.customer_id // 1 cliente pode ter N pedidos
+Ref: tb_order_items.order_id > tb_orders.order_id // 1 pedido pode ter N itens
+Ref: tb_order_reviews.order_id > tb_orders.order_id // 1 pedido pode ter N avaliações
