@@ -113,3 +113,13 @@ Nesta primeira versão, o pipeline realiza a extração dos dados locais e o car
 
 ### Modelo Multidimensional - Star Schema
 ![Modelo de Dados](docs/gold-star-schema.png)
+
+
+
+## Visualização de Dados (Looker Studio)
+
+Abaixo está a V1 do dashboard interativo construído no Looker Studio a partir da Tabela Fato na camada Gold (BigQuery):
+
+
+![Dashboard Looker Studio](docs/dashboard/levantamento-logistico-v1.png)
+
