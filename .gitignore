@@ -4,6 +4,7 @@
 # Dados locais
 data/
 .csv
+*.csv
 .zip
 .tar
 .tar.gz
